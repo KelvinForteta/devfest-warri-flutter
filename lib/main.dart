@@ -9,6 +9,14 @@ class DevFestWarri extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'DevFest Warri',
+      theme: ThemeData(
+          primarySwatch: Colors.blue,
+          primaryColor: Colors.white,
+          canvasColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            // elevation: 0,
+            color: Colors.white,
+          )),
       home: HomeScreen(),
     );
   }
