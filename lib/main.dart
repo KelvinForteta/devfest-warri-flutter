@@ -12,7 +12,7 @@ class DevFestWarri extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           primaryColor: Colors.white,
-          canvasColor: Colors.white,
+          // canvasColor: Colors.grey,
           appBarTheme: AppBarTheme(
             // elevation: 0,
             color: Colors.white,
