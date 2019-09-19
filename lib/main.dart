@@ -17,6 +17,7 @@ class DevFestWarri extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'DevFest Warri',
+      color: Colors.white,
       // This theme would be used when user turn on Dark Mode on Android 10 or Q
       darkTheme: ThemeData(brightness: Brightness.dark),
       // Default theme
@@ -25,7 +26,7 @@ class DevFestWarri extends StatelessWidget {
         primaryColor: Colors.white,
         // canvasColor: Colors.grey,
         appBarTheme: AppBarTheme(
-          // elevation: 0,
+          elevation: 0,
           color: Colors.white,
         ),
       ),

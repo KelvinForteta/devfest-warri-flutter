@@ -1,9 +1,12 @@
+import 'package:devfest_warri/components/menu_card.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('DevFest Warri'),
         centerTitle: true,
@@ -20,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             height: 200.0,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/images/devfest.png'),
+              image: AssetImage('assets/images/devfest-animated-logo.gif'),
               fit: BoxFit.fill,
             )),
           ),
@@ -32,111 +35,133 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
+          GestureDetector(
+            onTap: () {
+              print('tapped');
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!..',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ),
-          Container(
-            height: 390,
-            child: GridView.count(
-              shrinkWrap: true,
-              primary: true,
-              padding: const EdgeInsets.all(7.0),
-              crossAxisSpacing: 7.0,
-              mainAxisSpacing: 7,
-              crossAxisCount: 3,
-              children: <Widget>[
-                CardWidget(
-                    image: 'assets/images/agenda2.png',
-                    name: 'Agenda',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/speaker.png',
-                    name: 'Speakers',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/team.png',
-                    name: 'Team',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/twitter.png',
-                    name: 'Tweet',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/paper.png',
-                    name: 'RSVP',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/map.png',
-                    name: 'Location',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/photo.png',
-                    name: 'Photos',
-                    onTapped: () {}),
-                CardWidget(
-                    image: 'assets/images/bag_cash_money_64px.png',
-                    name: 'Sponsors',
-                    onTapped: () {}),
-                CardWidget(
-                  image: 'assets/images/wifi.png',
-                  name: 'WiFi',
-                  onTapped: () {},
+          OrientationBuilder(
+            builder: (context, orientation) {
+              print(orientation);
+              return Container(
+                height: orientation == Orientation.portrait ? 370 : 280,
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  primary: true,
+                  padding: const EdgeInsets.all(7.0),
+                  crossAxisSpacing: 7.0,
+                  mainAxisSpacing: 7,
+                  crossAxisCount: orientation == Orientation.portrait ? 3 : 4,
+                  children: <Widget>[
+                    MenuCard(
+                        image: 'assets/images/time.png',
+                        name: 'Agenda',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/speaker.png',
+                        name: 'Speakers',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/team.png',
+                        name: 'Team',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/twitter.png',
+                        name: 'Tweet',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/paper.png',
+                        name: 'RSVP',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/map.png',
+                        name: 'Location',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/photo.png',
+                        name: 'Photos',
+                        onTapped: () {}),
+                    MenuCard(
+                        image: 'assets/images/cash.png',
+                        name: 'Sponsors',
+                        onTapped: () {}),
+                    MenuCard(
+                      image: 'assets/images/wifi.png',
+                      name: 'WiFi',
+                      onTapped: () {},
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  final String image;
-  final String name;
-  final Function onTapped;
-
-  CardWidget({@required this.image, @required this.name, this.onTapped});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      enableFeedback: true,
-      onTap: onTapped,
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+          SizedBox(
+            height: 10,
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset(
-                '$image',
-                height: 55,
+              IconButton(
+                // Use the FontAwesomeIcons class for the IconData
+                icon: new Icon(
+                  FontAwesomeIcons.twitter,
+                  size: 37,
+                ),
+                onPressed: () {
+                  print("Pressed");
+                },
               ),
               SizedBox(
-                height: 10,
+                width: 10,
               ),
-              Text(
-                '$name',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
+              IconButton(
+                // Use the FontAwesomeIcons class for the IconData
+                icon: new Icon(
+                  FontAwesomeIcons.meetup,
+                  size: 37,
                 ),
-              )
+                onPressed: () {
+                  print("Pressed");
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              IconButton(
+                // Use the FontAwesomeIcons class for the IconData
+                icon: new Icon(
+                  FontAwesomeIcons.envelope,
+                  size: 37,
+                ),
+                onPressed: () {
+                  print("Pressed");
+                },
+              ),
             ],
           ),
-        ),
+          SizedBox(
+            height: 15,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              '#DevFestWarri',
+              style: TextStyle(fontSize: 20, color: Colors.blue),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+        ],
       ),
     );
   }
