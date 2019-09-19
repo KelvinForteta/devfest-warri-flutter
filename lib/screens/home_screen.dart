@@ -12,6 +12,19 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('DevFest Warri'),
         centerTitle: true,
+        leading: InkWell(
+          onTap: () {},
+          radius: 50,
+          child: Padding(
+            padding: const EdgeInsets.all(7.0),
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage('assets/images/gdg_logo.jpg'),
+              //radius: 50,
+            ),
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share),
@@ -46,70 +59,70 @@ class HomeScreen extends StatelessWidget {
               child: Text(
                 'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!..',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 15),
               ),
             ),
           ),
-          OrientationBuilder(
-            builder: (context, orientation) {
-              print(orientation);
-              return Container(
-                height: orientation == Orientation.portrait ? 370 : 280,
-                child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  primary: true,
-                  padding: const EdgeInsets.all(7.0),
-                  crossAxisSpacing: 7.0,
-                  mainAxisSpacing: 7,
-                  crossAxisCount: orientation == Orientation.portrait ? 3 : 4,
-                  children: <Widget>[
-                    MenuCard(
-                        image: 'assets/images/time.png',
-                        name: 'Agenda',
-                        onTapped: () {}),
-                    MenuCard(
-                        image: 'assets/images/speaker.png',
-                        name: 'Speakers',
-                        onTapped: () {}),
-                    MenuCard(
-                        image: 'assets/images/team.png',
-                        name: 'Team',
-                        onTapped: () {}),
-                    MenuCard(
-                        image: 'assets/images/twitter.png',
-                        name: 'Tweet',
-                        onTapped: () {
-                          _launchTwitter();
-                        }),
-                    MenuCard(
-                        image: 'assets/images/paper.png',
-                        name: 'RSVP',
-                        onTapped: () {
-                          _launchURL(context,
-                              'https://www.meetup.com/GDG-Warri/events/263205974/');
-                        }),
-                    MenuCard(
-                        image: 'assets/images/map.png',
-                        name: 'Location',
-                        onTapped: () {}),
-                    MenuCard(
-                        image: 'assets/images/photo.png',
-                        name: 'Photos',
-                        onTapped: () {}),
-                    MenuCard(
-                        image: 'assets/images/cash.png',
-                        name: 'Sponsors',
-                        onTapped: () {}),
-                    MenuCard(
-                      image: 'assets/images/wifi.png',
-                      name: 'WiFi',
-                      onTapped: () {},
-                    ),
-                  ],
+          Container(
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 370
+                : 450,
+            child: GridView.count(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              primary: true,
+              padding: const EdgeInsets.all(7.0),
+              crossAxisSpacing: 7,
+              mainAxisSpacing: 7,
+              crossAxisCount:
+                  MediaQuery.of(context).orientation == Orientation.portrait
+                      ? 3
+                      : 4,
+              children: <Widget>[
+                MenuCard(
+                    image: 'assets/images/time.png',
+                    name: 'Agenda',
+                    onTapped: () {}),
+                MenuCard(
+                    image: 'assets/images/speaker.png',
+                    name: 'Speakers',
+                    onTapped: () {}),
+                MenuCard(
+                    image: 'assets/images/team.png',
+                    name: 'Team',
+                    onTapped: () {}),
+                MenuCard(
+                    image: 'assets/images/twitter.png',
+                    name: 'Tweet',
+                    onTapped: () {
+                      _launchTwitter();
+                    }),
+                MenuCard(
+                    image: 'assets/images/meetup.png',
+                    name: 'RSVP',
+                    onTapped: () {
+                      _launchURL(context,
+                          'https://www.meetup.com/GDG-Warri/events/263205974/');
+                    }),
+                MenuCard(
+                    image: 'assets/images/map.png',
+                    name: 'Location',
+                    onTapped: () {}),
+                MenuCard(
+                    image: 'assets/images/photo.png',
+                    name: 'Photos',
+                    onTapped: () {}),
+                MenuCard(
+                    image: 'assets/images/cash.png',
+                    name: 'Sponsors',
+                    onTapped: () {}),
+                MenuCard(
+                  image: 'assets/images/wifi.png',
+                  name: 'WiFi',
+                  onTapped: () {},
                 ),
-              );
-            },
+              ],
+            ),
           ),
           SizedBox(
             height: 10,
@@ -121,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.twitter,
-                  size: 37,
+                  size: 30,
                 ),
                 onPressed: () {
                   url_laucher.launch('https://twitter.com/gdg_warri');
@@ -134,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.meetup,
-                  size: 37,
+                  size: 30,
                 ),
                 onPressed: () {
                   url_laucher.launch('https://www.meetup.com/GDG-Warri/');
@@ -147,10 +160,10 @@ class HomeScreen extends StatelessWidget {
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.envelope,
-                  size: 37,
+                  size: 30,
                 ),
                 onPressed: () {
-                  print("Pressed");
+                  url_laucher.launch('mailto:charles.eteure@gmail.com');
                 },
               ),
             ],
@@ -161,8 +174,8 @@ class HomeScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              '#DevFestWarri',
-              style: TextStyle(fontSize: 20, color: Colors.blue),
+              '@gdg_warri',
+              style: TextStyle(fontSize: 15, color: Colors.blue),
             ),
           ),
           SizedBox(
