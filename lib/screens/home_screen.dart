@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                     name: 'Photos',
                     onTapped: () {}),
                 CardWidget(
-                    image: 'assets/images/sponsor.png',
+                    image: 'assets/images/bag_cash_money_64px.png',
                     name: 'Sponsors',
                     onTapped: () {}),
                 CardWidget(
@@ -120,7 +120,10 @@ class CardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset('$image'),
+              Image.asset(
+                '$image',
+                height: 55,
+              ),
               SizedBox(
                 height: 10,
               ),
