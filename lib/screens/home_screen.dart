@@ -1,6 +1,8 @@
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -77,11 +79,16 @@ class HomeScreen extends StatelessWidget {
                     MenuCard(
                         image: 'assets/images/twitter.png',
                         name: 'Tweet',
-                        onTapped: () {}),
+                        onTapped: () {
+                          _launchTwitter();
+                        }),
                     MenuCard(
                         image: 'assets/images/paper.png',
                         name: 'RSVP',
-                        onTapped: () {}),
+                        onTapped: () {
+                          _launchURL(context,
+                              'https://www.meetup.com/GDG-Warri/events/263205974/');
+                        }),
                     MenuCard(
                         image: 'assets/images/map.png',
                         name: 'Location',
@@ -117,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                   size: 37,
                 ),
                 onPressed: () {
-                  print("Pressed");
+                  url_laucher.launch('https://twitter.com/gdg_warri');
                 },
               ),
               SizedBox(
@@ -130,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                   size: 37,
                 ),
                 onPressed: () {
-                  print("Pressed");
+                  url_laucher.launch('https://www.meetup.com/GDG-Warri/');
                 },
               ),
               SizedBox(
@@ -164,5 +171,46 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _launchURL(BuildContext context, String url) async {
+    try {
+      await launch(
+        url,
+        option: CustomTabsOption(
+          toolbarColor: Theme.of(context).primaryColor,
+          enableDefaultShare: true,
+          enableUrlBarHiding: true,
+          showPageTitle: true,
+          // animation: new CustomTabsAnimation.slideIn()
+          // or user defined animation.
+          animation: new CustomTabsAnimation(
+            startEnter: 'slide_up',
+            startExit: 'android:anim/fade_out',
+            endEnter: 'android:anim/fade_in',
+            endExit: 'slide_down',
+          ),
+          extraCustomTabs: <String>[
+            // ref. https://play.google.com/store/apps/details?id=org.mozilla.firefox
+            'org.mozilla.firefox',
+            // ref. https://play.google.com/store/apps/details?id=com.microsoft.emmx
+            'com.microsoft.emmx',
+          ],
+        ),
+      );
+    } catch (e) {
+      // An exception is thrown if browser app is not installed on Android device.
+      debugPrint(e.toString());
+    }
+  }
+}
+
+_launchTwitter() async {
+  const url =
+      'https://twitter.com/intent/tweet?text=%23DevFest%20%23DevFestWarri%20@gdg_warri';
+  if (await url_laucher.canLaunch(url)) {
+    await url_laucher.launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
