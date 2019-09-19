@@ -1,4 +1,9 @@
+import 'package:devfest_warri/screens/agenda_screen.dart';
 import 'package:devfest_warri/screens/home_screen.dart';
+import 'package:devfest_warri/screens/location_screen.dart';
+import 'package:devfest_warri/screens/photos_screen.dart';
+import 'package:devfest_warri/screens/speakers_screen.dart';
+import 'package:devfest_warri/screens/team_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
@@ -34,7 +39,15 @@ class DevFestWarri extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      home: HomeScreen(),
+      initialRoute: HomeScreen.ID,
+      routes: {
+        HomeScreen.ID: (context) => HomeScreen(),
+        AgendaScreen.ID: (context) => AgendaScreen(),
+        LocationScreen.ID: (context) => LocationScreen(),
+        PhotosScreen.ID: (context) => PhotosScreen(),
+        SpeakersScreen.ID: (context) => SpeakersScreen(),
+        TeamScreen.ID: (context) => TeamScreen(),
+      },
     );
   }
 }

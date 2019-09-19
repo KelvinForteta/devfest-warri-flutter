@@ -1,11 +1,18 @@
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
+import 'package:devfest_warri/screens/location_screen.dart';
+import 'package:devfest_warri/screens/photos_screen.dart';
+import 'package:devfest_warri/screens/speakers_screen.dart';
+import 'package:devfest_warri/screens/team_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
+import 'agenda_screen.dart';
+
 class HomeScreen extends StatelessWidget {
+  static const ID = 'home_screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,15 +120,21 @@ class HomeScreen extends StatelessWidget {
                 MenuCard(
                     image: 'assets/images/time.png',
                     name: 'Agenda',
-                    onTapped: () {}),
+                    onTapped: () {
+                      Navigator.pushNamed(context, AgendaScreen.ID);
+                    }),
                 MenuCard(
                     image: 'assets/images/speaker.png',
                     name: 'Speakers',
-                    onTapped: () {}),
+                    onTapped: () {
+                      Navigator.pushNamed(context, SpeakersScreen.ID);
+                    }),
                 MenuCard(
                     image: 'assets/images/team.png',
                     name: 'Team',
-                    onTapped: () {}),
+                    onTapped: () {
+                      Navigator.pushNamed(context, TeamScreen.ID);
+                    }),
                 MenuCard(
                     image: 'assets/images/twitter.png',
                     name: 'Tweet',
@@ -138,11 +151,15 @@ class HomeScreen extends StatelessWidget {
                 MenuCard(
                     image: 'assets/images/map.png',
                     name: 'Location',
-                    onTapped: () {}),
+                    onTapped: () {
+                      Navigator.pushNamed(context, LocationScreen.ID);
+                    }),
                 MenuCard(
                     image: 'assets/images/photo.png',
                     name: 'Photos',
-                    onTapped: () {}),
+                    onTapped: () {
+                      Navigator.pushNamed(context, PhotosScreen.ID);
+                    }),
                 MenuCard(
                     image: 'assets/images/cash.png',
                     name: 'Sponsors',
