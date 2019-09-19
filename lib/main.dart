@@ -19,9 +19,13 @@ class DevFestWarri extends StatelessWidget {
       title: 'DevFest Warri',
       color: Colors.white,
       // This theme would be used when user turn on Dark Mode on Android 10 or Q
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        canvasColor: Colors.transparent,
+      ),
       // Default theme
       theme: ThemeData(
+        canvasColor: Colors.transparent,
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         // canvasColor: Colors.grey,

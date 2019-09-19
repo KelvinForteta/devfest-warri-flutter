@@ -1,3 +1,4 @@
+import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
@@ -42,24 +43,54 @@ class HomeScreen extends StatelessWidget {
               fit: BoxFit.fill,
             )),
           ),
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Text(
-              'Welcome',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+          GestureDetector(
+            onTap: () {
+              showAboutModelBottomSheet(context);
+            },
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                'Welcome to DevFest Warri 2019',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Oswald',
+                ),
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
-              print('tapped');
+              showAboutModelBottomSheet(context);
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!..',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 10,
+              ),
+              child: RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text:
+                          'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more! ',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Read more...',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -134,33 +165,33 @@ class HomeScreen extends StatelessWidget {
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.twitter,
-                  size: 30,
+                  size: 25,
                 ),
                 onPressed: () {
                   url_laucher.launch('https://twitter.com/gdg_warri');
                 },
               ),
               SizedBox(
-                width: 10,
+                width: 5,
               ),
               IconButton(
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.meetup,
-                  size: 30,
+                  size: 25,
                 ),
                 onPressed: () {
                   url_laucher.launch('https://www.meetup.com/GDG-Warri/');
                 },
               ),
               SizedBox(
-                width: 10,
+                width: 5,
               ),
               IconButton(
                 // Use the FontAwesomeIcons class for the IconData
                 icon: new Icon(
                   FontAwesomeIcons.envelope,
-                  size: 30,
+                  size: 25,
                 ),
                 onPressed: () {
                   url_laucher.launch('mailto:charles.eteure@gmail.com');
@@ -215,6 +246,14 @@ class HomeScreen extends StatelessWidget {
       // An exception is thrown if browser app is not installed on Android device.
       debugPrint(e.toString());
     }
+  }
+
+  void showAboutModelBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => AboutBottomSheet(),
+        isScrollControlled: true,
+        elevation: 15);
   }
 }
 
