@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
+import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
 import 'package:devfest_warri/screens/photos_screen.dart';
 import 'package:devfest_warri/screens/speakers_screen.dart';
@@ -14,10 +14,11 @@ import 'agenda_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const ID = 'home_screen';
-  final Firestore firestore = Firestore.instance;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('DevFest Warri'),
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              showAboutModelBottomSheet(context);
+              showAboutModelBottomSheet(context, AboutBottomSheet());
             },
             child: Container(
               padding: EdgeInsets.all(20),
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              showAboutModelBottomSheet(context);
+              showAboutModelBottomSheet(context, AboutBottomSheet());
             },
             child: Container(
               padding: EdgeInsets.only(
@@ -169,7 +170,13 @@ class HomeScreen extends StatelessWidget {
                 MenuCard(
                   image: 'assets/images/wifi.png',
                   name: 'WiFi',
-                  onTapped: () {},
+                  onTapped: () {
+                    showAboutModelBottomSheet(
+                        context,
+                        WifiBottomSheet(
+                          scaffold: _scaffoldKey,
+                        ));
+                  },
                 ),
               ],
             ),
@@ -267,10 +274,10 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  void showAboutModelBottomSheet(context) {
+  void showAboutModelBottomSheet(context, Widget bottomSheetContent) {
     showModalBottomSheet(
         context: context,
-        builder: (context) => AboutBottomSheet(),
+        builder: (context) => bottomSheetContent,
         isScrollControlled: true,
         elevation: 15);
   }
