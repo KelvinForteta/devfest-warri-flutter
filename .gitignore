@@ -28,7 +28,7 @@
 .pub-cache/
 .pub/
 /build/
-
+/lib/private_constants.dart
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
