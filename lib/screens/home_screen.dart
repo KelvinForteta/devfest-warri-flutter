@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
@@ -13,6 +14,7 @@ import 'agenda_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const ID = 'home_screen';
+  final Firestore firestore = Firestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

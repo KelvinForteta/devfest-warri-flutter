@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "894685078875",
+    "firebase_url": "https://devfest-warri-1568969570115.firebaseio.com",
+    "project_id": "devfest-warri-1568969570115",
+    "storage_bucket": "devfest-warri-1568969570115.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894685078875:android:32f2731fcb2c142163e67e",
+        "android_client_info": {
+          "package_name": "com.maxinville.devfest_warri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894685078875-csa8e6biboo97evokp1ja43avoh51j9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVcfsYKqGhZOQn_btLQz0WZ7BRTpJGw8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894685078875-csa8e6biboo97evokp1ja43avoh51j9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

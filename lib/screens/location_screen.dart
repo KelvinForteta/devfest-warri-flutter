@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -38,48 +37,33 @@ class _LocationScreenState extends State<LocationScreen> {
             markers: {manuexPlace},
           ),
           Positioned(
-            top: 30,
-            left: 10,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.black.withOpacity(0.5),
-              child: IconButton(
-                  icon: Icon(
-                    FontAwesomeIcons.arrowLeft,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    // close the screen
-                    Navigator.pop(context);
-                    // change the status bar color to white
-                    FlutterStatusbarcolor.setStatusBarColor(Colors.white);
-                  }),
-            ),
-          ),
-          Positioned(
             bottom: 0,
             child: Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               width: MediaQuery.of(context).size.width,
-              height: 60,
+              height: 52,
               decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black,
-                    blurRadius: 7.0,
-                  )
-                ],
-              ),
+                  color: Colors.white,
+                  border: Border(
+                      top: BorderSide(
+                    width: 1,
+                    color: Colors.grey,
+                  ))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(right: 20),
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 30,
-                    ),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                        ),
+                        onPressed: () {
+                          // close the screen
+                          Navigator.pop(context);
+                          // change the status bar color to white
+                          FlutterStatusbarcolor.setStatusBarColor(Colors.white);
+                        }),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
