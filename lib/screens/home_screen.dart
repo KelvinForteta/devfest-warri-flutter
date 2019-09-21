@@ -171,11 +171,7 @@ class HomeScreen extends StatelessWidget {
                   image: 'assets/images/wifi.png',
                   name: 'WiFi',
                   onTapped: () {
-                    showAboutModelBottomSheet(
-                        context,
-                        WifiBottomSheet(
-                          scaffold: _scaffoldKey,
-                        ));
+                    showAboutModelBottomSheet(context, WifiBottomSheet());
                   },
                 ),
               ],
