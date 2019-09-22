@@ -10,13 +10,32 @@ import 'package:devfest_warri/screens/team_screen.dart';
 import 'package:devfest_warri/utils/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
 import 'agenda_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const ID = 'home_screen';
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  String versionNumber;
+
+  @override
+  void initState() {
+    super.initState();
+
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      String versionNumber = packageInfo.version;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -318,7 +337,7 @@ class HomeScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              'v1.0.0',
+              '$versionNumber',
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
