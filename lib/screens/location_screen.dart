@@ -47,7 +47,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   border: Border(
                       top: BorderSide(
                     width: 1,
-                    color: Colors.grey[100],
+                    color: Colors.grey[300],
                   ))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
