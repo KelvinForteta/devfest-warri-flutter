@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                 bottom: 10,
               ),
               child: RichText(
-                textAlign: TextAlign.justify,
+                //  textAlign: TextAlign.justify,
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
@@ -236,22 +236,36 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            child: Center(
-              child: FlatButton.icon(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.blue,
-                  onPressed: () {
-                    launchURL(context,
-                        'https://docs.google.com/forms/d/e/1FAIpQLScaBvL2D6b7BJZ7jwtRrWIbXYGnFxSddIFC-0tHnCdgNVmMuA/viewform');
-                  },
-                  icon: Icon(
-                    Icons.share,
-                    color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Submit your #DevFestStory or #GDGStory for a chance to be featured on @googledevs video or blog.',
+                    style: TextStyle(fontSize: 15, color: Colors.black),
                   ),
-                  label: Text(
-                    'Share Your Story',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  )),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: FlatButton.icon(
+                      padding: EdgeInsets.all(10),
+                      color: Colors.blue,
+                      onPressed: () {
+                        launchURL(context,
+                            'https://docs.google.com/forms/d/e/1FAIpQLScaBvL2D6b7BJZ7jwtRrWIbXYGnFxSddIFC-0tHnCdgNVmMuA/viewform');
+                      },
+                      icon: Icon(
+                        Icons.share,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        'Share Your Story',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      )),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -304,8 +318,8 @@ class HomeScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              '@gdg_warri',
-              style: TextStyle(fontSize: 15, color: Colors.blue),
+              'v1.0.0',
+              style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
           SizedBox(

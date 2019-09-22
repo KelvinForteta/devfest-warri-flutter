@@ -35,6 +35,7 @@ dependencies:
   toast: ^0.1.5
   wifi: ^0.1.5
   avatar_glow: ^1.0.0
+  package_info: ^0.4.0+6
 
 dev_dependencies:
   flutter_test:
