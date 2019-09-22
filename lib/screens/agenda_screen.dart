@@ -77,22 +77,22 @@ class AgendaCard extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(
             title: Text(
-              title,
+              '$title',
               style: TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w800,
               ),
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  speaker,
-                  style: TextStyle(color: Colors.blue, fontSize: 15),
+                  '$speaker',
+                  style: TextStyle(color: Colors.blue, fontSize: 17),
                 ),
                 Text(
-                  aboutSpeaker,
-                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                  '$aboutSpeaker',
+                  style: TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ],
             ),
@@ -100,7 +100,7 @@ class AgendaCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  totalTalkTime,
+                  '$totalTalkTime',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 ),
                 Text(
@@ -112,7 +112,7 @@ class AgendaCard extends StatelessWidget {
             leading: photo.length != 0
                 ? CircleAvatar(
                     radius: 28,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.white,
                     backgroundImage: NetworkImage('$photo'),
                   )
                 : CircleAvatar(
