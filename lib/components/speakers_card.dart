@@ -16,6 +16,7 @@ class SpeakersCard extends StatelessWidget {
   final String linkedIn;
   final String web;
   final String email;
+  final String speakOn;
 
   SpeakersCard(
       {this.photo,
@@ -27,7 +28,8 @@ class SpeakersCard extends StatelessWidget {
       this.github,
       this.linkedIn,
       this.web,
-      this.email});
+      this.email,
+      this.speakOn});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -92,6 +94,24 @@ class SpeakersCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 17, color: Colors.grey[600]),
               ),
+              speakOn != null
+                  ? Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.mic,
+                          size: 25,
+                          color: Colors.blue,
+                        ),
+                        Text(
+                          '$speakOn',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.blue),
+                        ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: 10,
               ),

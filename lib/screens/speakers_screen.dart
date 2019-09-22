@@ -39,6 +39,7 @@ class SpeakersScreen extends StatelessWidget {
                     linkedIn: document['linkedin'],
                     web: document['web'],
                     email: document['email'],
+                    speakOn: document['speaking_on'],
                   );
                 }).toList(),
               );
