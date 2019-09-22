@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      String versionNumber = packageInfo.version;
+      versionNumber = packageInfo.version;
     });
   }
 
@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              '$versionNumber',
+              'v$versionNumber',
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
