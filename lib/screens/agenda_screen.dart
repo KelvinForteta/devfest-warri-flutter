@@ -80,7 +80,7 @@ class AgendaCard extends StatelessWidget {
               '$title',
               style: TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
               ),
             ),
             subtitle: Column(
@@ -98,6 +98,7 @@ class AgendaCard extends StatelessWidget {
             ),
             trailing: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   '$totalTalkTime',

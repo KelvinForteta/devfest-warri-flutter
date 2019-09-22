@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
+import 'package:devfest_warri/components/devfest_story_card.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
 import 'package:devfest_warri/screens/photos_screen.dart';
 import 'package:devfest_warri/screens/speakers_screen.dart';
 import 'package:devfest_warri/screens/team_screen.dart';
+import 'package:devfest_warri/utils/utilities.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
@@ -61,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.all(20),
               child: Text(
                 'Welcome to DevFest Warri 2019',
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
@@ -148,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                     image: 'assets/images/meetup.png',
                     name: 'RSVP',
                     onTapped: () {
-                      _launchURL(context,
+                      launchURL(context,
                           'https://www.meetup.com/GDG-Warri/events/263205974/');
                     }),
                 MenuCard(
@@ -179,6 +181,80 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(
             height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            height: 280,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '#DevFestStory #GDGStory',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Oswald',
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                    child: StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance
+                      .collection('devfest_story')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError)
+                      return new Text('Error: ${snapshot.error}');
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      default:
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: snapshot.data.documents
+                              .map((DocumentSnapshot document) {
+                            return DevFestStoryCard(
+                              title: document['title'],
+                              photo: document['photo'],
+                              link: document['link'],
+                            );
+                          }).toList(),
+                        );
+                    }
+                  },
+                )),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: Center(
+              child: FlatButton.icon(
+                  color: Colors.blue,
+                  onPressed: () {
+                    launchURL(context,
+                        'https://docs.google.com/forms/d/e/1FAIpQLScaBvL2D6b7BJZ7jwtRrWIbXYGnFxSddIFC-0tHnCdgNVmMuA/viewform');
+                  },
+                  icon: Icon(
+                    Icons.file_upload,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    'Upload Your Story',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  )),
+            ),
+          ),
+          SizedBox(
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -237,37 +313,6 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _launchURL(BuildContext context, String url) async {
-    try {
-      await launch(
-        url,
-        option: CustomTabsOption(
-          toolbarColor: Theme.of(context).primaryColor,
-          enableDefaultShare: true,
-          enableUrlBarHiding: true,
-          showPageTitle: true,
-          // animation: new CustomTabsAnimation.slideIn()
-          // or user defined animation.
-          animation: new CustomTabsAnimation(
-            startEnter: 'slide_up',
-            startExit: 'android:anim/fade_out',
-            endEnter: 'android:anim/fade_in',
-            endExit: 'slide_down',
-          ),
-          extraCustomTabs: <String>[
-            // ref. https://play.google.com/store/apps/details?id=org.mozilla.firefox
-            'org.mozilla.firefox',
-            // ref. https://play.google.com/store/apps/details?id=com.microsoft.emmx
-            'com.microsoft.emmx',
-          ],
-        ),
-      );
-    } catch (e) {
-      // An exception is thrown if browser app is not installed on Android device.
-      debugPrint(e.toString());
-    }
   }
 
   void showAboutModelBottomSheet(context, Widget bottomSheetContent) {

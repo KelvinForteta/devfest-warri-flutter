@@ -18,6 +18,7 @@ class AboutBottomSheet extends StatelessWidget {
         children: <Widget>[
           Container(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   'About DevFest 2019',
