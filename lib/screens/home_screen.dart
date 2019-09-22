@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/devfest_story_card.dart';
 import 'package:devfest_warri/components/menu_card.dart';
+import 'package:devfest_warri/components/sponsors_bottom_sheet.dart';
 import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
 import 'package:devfest_warri/screens/photos_screen.dart';
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           GestureDetector(
             onTap: () {
-              showAboutModelBottomSheet(context, AboutBottomSheet());
+              customModalBottomSheet(context, AboutBottomSheet());
             },
             child: Container(
               padding: EdgeInsets.all(20),
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           GestureDetector(
             onTap: () {
-              showAboutModelBottomSheet(context, AboutBottomSheet());
+              customModalBottomSheet(context, AboutBottomSheet());
             },
             child: Container(
               padding: EdgeInsets.only(
@@ -191,12 +192,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 MenuCard(
                     image: 'assets/images/cash.png',
                     name: 'Sponsors',
-                    onTapped: () {}),
+                    onTapped: () {
+                      customModalBottomSheet(context, SponsorsBottomSheet());
+                    }),
                 MenuCard(
                   image: 'assets/images/wifi.png',
                   name: 'WiFi',
                   onTapped: () {
-                    showAboutModelBottomSheet(context, WifiBottomSheet());
+                    customModalBottomSheet(context, WifiBottomSheet());
                   },
                 ),
               ],
@@ -364,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void showAboutModelBottomSheet(context, Widget bottomSheetContent) {
+  void customModalBottomSheet(context, Widget bottomSheetContent) {
     showModalBottomSheet(
         context: context,
         builder: (context) => bottomSheetContent,
