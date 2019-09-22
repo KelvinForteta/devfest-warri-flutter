@@ -110,7 +110,7 @@ class AgendaCard extends StatelessWidget {
                 )
               ],
             ),
-            leading: photo.length != 0
+            leading: photo.isNotEmpty
                 ? CircleAvatar(
                     radius: 28,
                     backgroundColor: Colors.white,
