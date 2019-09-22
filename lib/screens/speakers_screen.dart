@@ -16,6 +16,7 @@ class SpeakersScreen extends StatelessWidget {
         stream: Firestore.instance
             .collection('speakers')
             .where("type", isEqualTo: "speaker")
+            .orderBy('id', descending: false)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Error: ${snapshot.error}');
