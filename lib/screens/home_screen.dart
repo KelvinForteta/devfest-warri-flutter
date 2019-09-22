@@ -259,9 +259,20 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'Submit your #DevFestStory or #GDGStory for a chance to be featured on @googledevs video or blog.',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  child: RichText(
+                    //  textAlign: TextAlign.justify,
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text:
+                              'Submit your #DevFestStory or #GDGStory for a chance to be featured on @googledevs video or blog.',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
