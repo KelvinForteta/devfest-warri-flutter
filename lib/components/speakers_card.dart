@@ -75,10 +75,17 @@ class SpeakersCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
-              Text(
-                '$location',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.black87),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.location_on),
+                  Text(
+                    '$location',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
+                  ),
+                ],
               ),
               Text(
                 '$position',
