@@ -4,4 +4,6 @@ class FirebaseRepository {
   FirebaseMethods _firebaseMethods = FirebaseMethods();
 
   Stream getWifiDetails() => _firebaseMethods.getWifiDetails();
+
+  Stream getAgenda() => _firebaseMethods.getAgenda();
 }

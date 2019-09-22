@@ -12,7 +12,7 @@ class AvailableWifi extends StatelessWidget {
   AvailableWifi({
     @required this.name,
     this.password,
-    this.buttonText,
+    @required this.buttonText,
     this.canConnect = false,
     this.onPressed,
     this.isConnected = false,

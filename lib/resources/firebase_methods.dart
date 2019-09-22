@@ -6,4 +6,8 @@ class FirebaseMethods {
   Stream<QuerySnapshot> getWifiDetails() {
     return firestore.collection('wifi').snapshots();
   }
+
+  Stream<QuerySnapshot> getAgenda() {
+    return firestore.collection('agenda').snapshots();
+  }
 }
