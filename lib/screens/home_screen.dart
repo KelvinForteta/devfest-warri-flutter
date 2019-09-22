@@ -189,10 +189,10 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '#DevFestStory #GDGStory',
+                  'Be Inspired #DevFestStory #GDGStory',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 28,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Oswald',
                   ),
@@ -238,17 +238,18 @@ class HomeScreen extends StatelessWidget {
           Container(
             child: Center(
               child: FlatButton.icon(
+                  padding: EdgeInsets.all(10),
                   color: Colors.blue,
                   onPressed: () {
                     launchURL(context,
                         'https://docs.google.com/forms/d/e/1FAIpQLScaBvL2D6b7BJZ7jwtRrWIbXYGnFxSddIFC-0tHnCdgNVmMuA/viewform');
                   },
                   icon: Icon(
-                    Icons.file_upload,
+                    Icons.share,
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Upload Your Story',
+                    'Share Your Story',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )),
             ),

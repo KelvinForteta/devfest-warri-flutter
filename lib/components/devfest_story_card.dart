@@ -21,17 +21,17 @@ class DevFestStoryCard extends StatelessWidget {
             Container(
               width: 300.0,
               decoration: BoxDecoration(
-                  boxShadow: [
+                  /*boxShadow: [
                     BoxShadow(color: Colors.grey[200], offset: Offset(5.0, 5.0))
-                  ],
+                  ],*/
                   //color: Colors.black.withOpacity(0.5),
                   image: DecorationImage(
-                    image: NetworkImage('$photo'),
-                    fit: BoxFit.fill,
-                  )),
+                image: NetworkImage('$photo'),
+                fit: BoxFit.fill,
+              )),
             ),
             Container(
-              height: 250,
+              height: 280,
               width: 300,
               color: Colors.black.withOpacity(0.4),
               child: Align(
