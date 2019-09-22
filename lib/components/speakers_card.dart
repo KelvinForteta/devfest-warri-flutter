@@ -81,7 +81,10 @@ class SpeakersCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.location_on),
+                  Icon(
+                    Icons.location_on,
+                    size: 20,
+                  ),
                   Text(
                     '$location',
                     textAlign: TextAlign.center,
@@ -101,7 +104,7 @@ class SpeakersCard extends StatelessWidget {
                       children: <Widget>[
                         Icon(
                           Icons.mic,
-                          size: 25,
+                          size: 22,
                           color: Colors.blue,
                         ),
                         Text(

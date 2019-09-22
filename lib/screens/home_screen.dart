@@ -11,6 +11,7 @@ import 'package:devfest_warri/utils/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
 import 'agenda_screen.dart';
@@ -60,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share),
-            onPressed: () {},
+            onPressed: () {
+              // this will bring up the share dialog
+              Share.share('https://devfest.gdgwarri.tech');
+            },
           )
         ],
       ),
