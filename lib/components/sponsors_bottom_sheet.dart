@@ -6,7 +6,7 @@ class SponsorsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 300,
       // color: Colors.red,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -24,7 +24,7 @@ class SponsorsBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Meet Ours Sponsors',
+                  'Meet Our Sponsors',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -55,11 +55,15 @@ class SponsorsBottomSheet extends StatelessWidget {
                             itemCount: snapshot.data.documents.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount:
-                                        (MediaQuery.of(context).orientation ==
-                                                Orientation.portrait)
-                                            ? 2
-                                            : 3),
+                              crossAxisCount:
+                                  (MediaQuery.of(context).orientation ==
+                                          Orientation.portrait)
+                                      ? 2
+                                      : 3,
+                              childAspectRatio:
+                                  MediaQuery.of(context).size.width /
+                                      (MediaQuery.of(context).size.height / 2),
+                            ),
                             itemBuilder: (BuildContext context, int index) {
                               return SponsorsCard(
                                 name: snapshot.data.documents[index]['name'],
