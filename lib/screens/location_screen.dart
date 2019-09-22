@@ -22,7 +22,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     final String venueName = 'Manuex Place Event Centre & Hotel';
-    final String address = '209a Jakpa Rd · Warri';
+    final String address = '209a Jakpa Road · Warri';
     // change the status bar to be transparent
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     return new Scaffold(
@@ -47,7 +47,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   border: Border(
                       top: BorderSide(
                     width: 1,
-                    color: Colors.grey,
+                    color: Colors.grey[100],
                   ))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -98,7 +98,7 @@ class _LocationScreenState extends State<LocationScreen> {
     position: LatLng(5.563016, 5.766086),
     infoWindow: InfoWindow(
         title: 'Manuex Place Event Centre & Hotel',
-        snippet: '209a Jakpa Rd · Warri'),
+        snippet: '209a Jakpa Road · Warri'),
     visible: true,
     icon: BitmapDescriptor.defaultMarker,
   );
