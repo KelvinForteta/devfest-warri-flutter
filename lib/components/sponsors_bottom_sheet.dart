@@ -6,7 +6,7 @@ class SponsorsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 400,
       // color: Colors.red,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -60,9 +60,6 @@ class SponsorsBottomSheet extends StatelessWidget {
                                           Orientation.portrait)
                                       ? 2
                                       : 3,
-                              childAspectRatio:
-                                  MediaQuery.of(context).size.width /
-                                      (MediaQuery.of(context).size.height / 2),
                             ),
                             itemBuilder: (BuildContext context, int index) {
                               return SponsorsCard(

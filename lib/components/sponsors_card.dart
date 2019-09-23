@@ -12,10 +12,9 @@ class SponsorsCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CircleAvatar(
-          radius: 50,
-          backgroundColor: Colors.white,
-          backgroundImage: NetworkImage('$photo'),
+        Image.network(
+          '$photo',
+          height: 100,
         ),
         Text(
           '$name',

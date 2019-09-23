@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "894685078875-623f6fe5iq2vpnk26vlmkmt79bgql7lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maxinville.devfest_warri",
+            "certificate_hash": "b2a6eb36396eb9ad912de0a5ecc605750d2a296d"
+          }
+        },
+        {
           "client_id": "894685078875-csa8e6biboo97evokp1ja43avoh51j9i.apps.googleusercontent.com",
           "client_type": 3
         }

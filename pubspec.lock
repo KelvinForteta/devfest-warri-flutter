@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  firebase_analytics:
-    dependency: "direct main"
-    description:
-      name: firebase_analytics
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.2"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -76,6 +69,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_alert:
+    dependency: "direct main"
+    description:
+      name: flutter_alert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   flutter_custom_tabs:
     dependency: "direct main"
     description:
@@ -109,6 +109,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.21+2"
+  google_sign_in:
+    dependency: "direct main"
+    description:
+      name: google_sign_in
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.7"
   matcher:
     dependency: transitive
     description:

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
 import 'package:devfest_warri/components/devfest_story_card.dart';
+import 'package:devfest_warri/components/login_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:devfest_warri/components/sponsors_bottom_sheet.dart';
 import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
@@ -9,10 +10,14 @@ import 'package:devfest_warri/screens/photos_screen.dart';
 import 'package:devfest_warri/screens/speakers_screen.dart';
 import 'package:devfest_warri/screens/team_screen.dart';
 import 'package:devfest_warri/utils/utilities.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_alert/flutter_alert.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
 import 'agenda_screen.dart';
@@ -28,11 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   String versionNumber;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
-
+    // getCurrentUser();
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       versionNumber = packageInfo.version;
     });
@@ -40,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseUser loggedInUser = Provider.of<FirebaseUser>(context);
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -47,14 +54,20 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('DevFest Warri'),
         centerTitle: true,
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            loggedInUser != null
+                ? _showSignOutDialog()
+                : customModalBottomSheet(context, LoginBottomSheet());
+          },
           radius: 50,
           child: Padding(
             padding: const EdgeInsets.all(7.0),
             child: CircleAvatar(
               radius: 50,
               backgroundColor: Colors.white,
-              backgroundImage: AssetImage('assets/images/gdg_logo.jpg'),
+              backgroundImage: loggedInUser != null
+                  ? NetworkImage(loggedInUser.photoUrl)
+                  : AssetImage('assets/images/gdg_logo.jpg'),
               //radius: 50,
             ),
           ),
@@ -66,7 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
               // this will bring up the share dialog
               Share.share('https://devfest.gdgwarri.tech');
             },
-          )
+          ),
+          loggedInUser != null
+              ? IconButton(
+                  icon: Icon(FontAwesomeIcons.signOutAlt),
+                  onPressed: () {
+                    // Log the user out
+                    _showSignOutDialog();
+                  },
+                )
+              : Container()
         ],
       ),
       body: ListView(
@@ -112,19 +134,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more! ',
+                          'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!...',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
                       ),
                     ),
-                    TextSpan(
+                    /*TextSpan(
                       text: 'Read more...',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.blue,
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
@@ -364,6 +386,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showSignOutDialog() {
+    showAlert(
+      context: context,
+      title: "Sign out?",
+      body: "Are you sure you want to sign out?",
+      actions: [
+        AlertAction(
+          text: "Yes",
+          isDestructiveAction: true,
+          onPressed: () {
+            _auth.signOut();
+            Toast.show("Sign out was successful.", context,
+                duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          },
+        ),
+      ],
+      cancelable: true,
     );
   }
 
