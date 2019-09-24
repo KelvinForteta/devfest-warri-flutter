@@ -296,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Container(
             padding: EdgeInsets.only(left: 10, right: 10),
@@ -305,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Be Inspired #DevFestStory #GDGStory',
+                  'Blog Posts',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 28,
@@ -319,7 +319,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                     child: StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
-                      .collection('devfest_story')
+                      .collection('blog_posts')
+                      .orderBy('id', descending: true)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -347,50 +348,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 )),
                 SizedBox(
                   height: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: RichText(
-                    //  textAlign: TextAlign.justify,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text:
-                              'Submit your #DevFestStory or #GDGStory for a chance to be featured on @googledevs video or blog.',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Center(
-                  child: FlatButton.icon(
-                      padding: EdgeInsets.all(10),
-                      color: Colors.blue,
-                      onPressed: () {
-                        launchURL(context,
-                            'https://docs.google.com/forms/d/e/1FAIpQLScaBvL2D6b7BJZ7jwtRrWIbXYGnFxSddIFC-0tHnCdgNVmMuA/viewform');
-                      },
-                      icon: Icon(
-                        Icons.share,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        'Share Your Story',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      )),
                 ),
               ],
             ),
