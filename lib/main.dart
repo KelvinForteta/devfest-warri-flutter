@@ -1,3 +1,4 @@
+import 'package:devfest_warri/screens/about_screen.dart';
 import 'package:devfest_warri/screens/agenda_screen.dart';
 import 'package:devfest_warri/screens/home_screen.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
@@ -58,6 +59,7 @@ class DevFestWarri extends StatelessWidget {
           PhotosScreen.ID: (context) => PhotosScreen(),
           SpeakersScreen.ID: (context) => SpeakersScreen(),
           TeamScreen.ID: (context) => TeamScreen(),
+          AboutScreen.ID: (context) => AboutScreen(),
         },
       ),
     );

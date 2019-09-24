@@ -83,7 +83,7 @@ class SpeakersCard extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.location_on,
-                    size: 20,
+                    size: 18,
                   ),
                   Text(
                     '$location',
@@ -124,7 +124,8 @@ class SpeakersCard extends StatelessWidget {
                 color: Colors.grey,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   twitter != null
                       ? IconButton(

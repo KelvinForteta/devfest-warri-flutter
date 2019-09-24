@@ -1,6 +1,5 @@
 import 'package:devfest_warri/resources/firebase_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
 
 class LoginBottomSheet extends StatelessWidget {
@@ -8,33 +7,20 @@ class LoginBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 80,
-        // color: Colors.red,
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
+      height: 150,
+      // color: Colors.red,
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
         ),
-        child: Center(
-          child: FlatButton.icon(
-            onPressed: () {
-              // call the sign in method
-              processLogin(context);
-            },
-            icon: Icon(
-              FontAwesomeIcons.google,
-              color: Colors.white,
-            ),
-            label: Text(
-              'Sign in with Google',
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.red,
-          ),
-        ));
+      ),
+      child: Center(
+        child: _signInButton(context),
+      ),
+    );
   }
 
   void processLogin(BuildContext context) async {
@@ -52,5 +38,42 @@ class LoginBottomSheet extends StatelessWidget {
       Toast.show("An error occurred. Try again.", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
+  }
+
+  Widget _signInButton(BuildContext context) {
+    return Container(
+      height: 50,
+      child: OutlineButton(
+        splashColor: Colors.grey,
+        onPressed: () {
+          processLogin(context);
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        highlightElevation: 0,
+        borderSide: BorderSide(color: Colors.grey),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                  image: AssetImage("assets/images/google_logo.png"),
+                  height: 35.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  'Sign in with Google',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:devfest_warri/components/login_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:devfest_warri/components/sponsors_bottom_sheet.dart';
 import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
+import 'package:devfest_warri/models/menu_item.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
 import 'package:devfest_warri/screens/photos_screen.dart';
 import 'package:devfest_warri/screens/speakers_screen.dart';
@@ -17,9 +18,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
 
+import 'about_screen.dart';
 import 'agenda_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,6 +50,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     FirebaseUser loggedInUser = Provider.of<FirebaseUser>(context);
+
+    // Menu Items list
+    List<MenuItems> menuItems = [
+      MenuItems(
+        title: Text('Share'),
+        icon: Icon(Icons.share),
+        name: 'share',
+      ),
+      loggedInUser != null
+          ? MenuItems(
+              title: Text('Sign Out'),
+              icon: Icon(FontAwesomeIcons.signOutAlt),
+              name: 'signout')
+          : MenuItems(
+              title: Text('Sign In'),
+              icon: Icon(FontAwesomeIcons.signInAlt),
+              name: 'signin'),
+      MenuItems(
+        title: Text('About'),
+        icon: Icon(Icons.info),
+        name: 'about',
+      ),
+    ];
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -73,22 +100,42 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () {
-              // this will bring up the share dialog
-              Share.share('https://devfest.gdgwarri.tech');
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return menuItems.map((MenuItems item) {
+                return PopupMenuItem(
+                  value: item.name,
+                  child: ListTile(
+                    title: item.title,
+                    leading: item.icon,
+                  ),
+                );
+              }).toList();
             },
-          ),
-          loggedInUser != null
-              ? IconButton(
-                  icon: Icon(FontAwesomeIcons.signOutAlt),
-                  onPressed: () {
-                    // Log the user out
-                    _showSignOutDialog();
-                  },
-                )
-              : Container()
+            onSelected: (value) {
+              switch (value) {
+                case 'share':
+                  Share.share('https://devfest.gdgwarri.tech');
+                  break;
+
+                case 'signin':
+                  // Log the user out
+                  customModalBottomSheet(context, LoginBottomSheet());
+                  break;
+
+                case 'signout':
+                  // Log the user out
+                  _showSignOutDialog();
+                  break;
+
+                case 'about':
+                  Navigator.pushNamed(context, AboutScreen.ID);
+                  break;
+
+                default:
+              }
+            },
+          )
         ],
       ),
       body: ListView(
@@ -107,14 +154,35 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Container(
               padding: EdgeInsets.all(20),
-              child: Text(
-                'Welcome to DevFest Warri 2019',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Oswald',
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Shimmer.fromColors(
+                    baseColor: Colors.blue,
+                    highlightColor: Colors.green,
+                    child: Text(
+                      '5 October, 2019',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Oswald',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Welcome to DevFest Warri 2019',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Oswald',
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -392,7 +460,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _showSignOutDialog() {
     showAlert(
       context: context,
-      title: "Sign out?",
+      // title: "Sign out?",
       body: "Are you sure you want to sign out?",
       actions: [
         AlertAction(

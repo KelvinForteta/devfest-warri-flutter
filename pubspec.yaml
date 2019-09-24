@@ -39,6 +39,7 @@ dependencies:
   share: ^0.6.2+1
   google_sign_in: ^4.0.7
   flutter_alert: ^0.4.0
+  shimmer: ^1.0.1
 
 dev_dependencies:
   flutter_test:

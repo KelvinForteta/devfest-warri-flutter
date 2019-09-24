@@ -8,19 +8,24 @@ class SponsorsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.network(
-          '$photo',
-          height: 100,
-        ),
-        Text(
-          '$name',
-          style: TextStyle(fontSize: 15),
-        )
-      ],
+        child: Padding(
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.network(
+            '$photo',
+            height: 100,
+          ),
+          Text(
+            '$name',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
+          ),
+          Icon(Icons.open_in_new)
+        ],
+      ),
     ) //just for testing, will fill with image later
         );
   }

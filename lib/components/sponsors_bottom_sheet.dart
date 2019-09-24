@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/sponsors_card.dart';
+import 'package:devfest_warri/utils/utilities.dart';
 import 'package:flutter/material.dart';
 
 class SponsorsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 420,
       // color: Colors.red,
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.only(
@@ -62,9 +63,16 @@ class SponsorsBottomSheet extends StatelessWidget {
                                       : 3,
                             ),
                             itemBuilder: (BuildContext context, int index) {
-                              return SponsorsCard(
-                                name: snapshot.data.documents[index]['name'],
-                                photo: snapshot.data.documents[index]['photo'],
+                              return GestureDetector(
+                                onTap: () {
+                                  launchURL(context,
+                                      snapshot.data.documents[index]['link']);
+                                },
+                                child: SponsorsCard(
+                                  name: snapshot.data.documents[index]['name'],
+                                  photo: snapshot.data.documents[index]
+                                      ['photo'],
+                                ),
                               );
                             },
                           ),
