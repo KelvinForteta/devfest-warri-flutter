@@ -220,10 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).orientation == Orientation.portrait
-                ? 370
-                : 450,
+          SizedBox(
             child: GridView.count(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,

@@ -13,7 +13,7 @@ class MenuCard extends StatelessWidget {
       enableFeedback: true,
       onTap: onTapped,
       child: Card(
-        elevation: 5,
+        elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
