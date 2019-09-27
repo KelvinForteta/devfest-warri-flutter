@@ -26,6 +26,7 @@ class LoginBottomSheet extends StatelessWidget {
   void processLogin(BuildContext context) async {
     try {
       var auth = await _firebaseRepository.signIn();
+      print('failing');
       if (auth != null) {
         Navigator.pop(context);
         Toast.show("You are now signed in.", context,

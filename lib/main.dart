@@ -1,3 +1,4 @@
+import 'package:devfest_warri/models/wifi_isconnecting.dart';
 import 'package:devfest_warri/screens/about_screen.dart';
 import 'package:devfest_warri/screens/agenda_screen.dart';
 import 'package:devfest_warri/screens/home_screen.dart';
@@ -24,22 +25,23 @@ class DevFestWarri extends StatelessWidget {
     }
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<IsConnecting>.value(value: IsConnecting()),
+        // Provider<IsConnecting>.value(value: IsConnecting()),
+        //StreamProvider<IsConnecting>.value(value: IsConnecting),
         // Make user stream available
         StreamProvider<FirebaseUser>.value(
           value: FirebaseAuth.instance.onAuthStateChanged,
         ),
-        // See implementation details in next sections
-        // StreamProvider<SuperHero>.value(stream: firestoreStream),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'DevFest Warri',
         color: Colors.white,
         // This theme would be used when user turn on Dark Mode on Android 10 or Q
-        darkTheme: ThemeData(
+        /*darkTheme: ThemeData(
           brightness: Brightness.dark,
           canvasColor: Colors.transparent,
-        ),
+        ),*/
         // Default theme
         theme: ThemeData(
           canvasColor: Colors.transparent,

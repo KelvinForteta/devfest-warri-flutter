@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devfest_warri/components/about_bottom_sheet.dart';
+import 'package:devfest_warri/components/custom_modal_bottom_sheet.dart';
 import 'package:devfest_warri/components/devfest_story_card.dart';
 import 'package:devfest_warri/components/login_bottom_sheet.dart';
 import 'package:devfest_warri/components/menu_card.dart';
 import 'package:devfest_warri/components/sponsors_bottom_sheet.dart';
-import 'package:devfest_warri/components/wifi_bottom_sheet.dart';
 import 'package:devfest_warri/models/menu_item.dart';
 import 'package:devfest_warri/screens/location_screen.dart';
-import 'package:devfest_warri/screens/photos_screen.dart';
 import 'package:devfest_warri/screens/speakers_screen.dart';
 import 'package:devfest_warri/screens/team_screen.dart';
 import 'package:devfest_warri/utils/utilities.dart';
@@ -18,6 +17,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart' as url_laucher;
@@ -51,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     FirebaseUser loggedInUser = Provider.of<FirebaseUser>(context);
 
+    bool isLoggedIn() {
+      return loggedInUser != null;
+    }
+
     // Menu Items list
     List<MenuItems> menuItems = [
       MenuItems(
@@ -58,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Icon(Icons.share),
         name: 'share',
       ),
-      loggedInUser != null
+      isLoggedIn()
           ? MenuItems(
               title: Text('Sign Out'),
               icon: Icon(FontAwesomeIcons.signOutAlt),
@@ -67,11 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Sign In'),
               icon: Icon(FontAwesomeIcons.signInAlt),
               name: 'signin'),
-      MenuItems(
+      /* MenuItems(
         title: Text('About'),
         icon: Icon(Icons.info),
         name: 'about',
-      ),
+      ),*/
     ];
 
     return Scaffold(
@@ -80,23 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('DevFest Warri'),
         centerTitle: true,
-        leading: InkWell(
-          onTap: () {
-            loggedInUser != null
-                ? _showSignOutDialog()
-                : customModalBottomSheet(context, LoginBottomSheet());
-          },
-          radius: 50,
-          child: Padding(
-            padding: const EdgeInsets.all(7.0),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.white,
-              backgroundImage: loggedInUser != null
-                  ? NetworkImage(loggedInUser.photoUrl)
-                  : AssetImage('assets/images/gdg_logo.jpg'),
-              //radius: 50,
-            ),
+        leading: Padding(
+          padding: const EdgeInsets.all(7.0),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.white,
+            backgroundImage: isLoggedIn()
+                ? NetworkImage(loggedInUser.photoUrl)
+                : AssetImage('assets/images/gdg_logo.jpg'),
+            //radius: 50,
           ),
         ),
         actions: <Widget>[
@@ -106,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return PopupMenuItem(
                   value: item.name,
                   child: ListTile(
+                    contentPadding: EdgeInsets.only(left: 0),
                     title: item.title,
                     leading: item.icon,
                   ),
@@ -202,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          'GDG DevFest 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!...',
+                          'GDG DevFest Warri 2019 is our annual all-day developer conference that offers speaker sessions across multiple product areas, codelabs, hackathon and more!...',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -270,25 +267,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTapped: () {
                       Navigator.pushNamed(context, LocationScreen.ID);
                     }),
-                MenuCard(
+                /*MenuCard(
                     image: 'assets/images/photo.png',
                     name: 'Photos',
                     onTapped: () {
                       Navigator.pushNamed(context, PhotosScreen.ID);
-                    }),
+                    }),*/
                 MenuCard(
                     image: 'assets/images/cash.png',
                     name: 'Sponsors',
                     onTapped: () {
                       customModalBottomSheet(context, SponsorsBottomSheet());
                     }),
-                MenuCard(
+                /*MenuCard(
                   image: 'assets/images/wifi.png',
                   name: 'WiFi',
                   onTapped: () {
                     customModalBottomSheet(context, WifiBottomSheet());
                   },
-                ),
+                ),*/
               ],
             ),
           ),
@@ -420,8 +417,9 @@ class _HomeScreenState extends State<HomeScreen> {
         AlertAction(
           text: "Yes",
           isDestructiveAction: true,
-          onPressed: () {
+          onPressed: () async {
             _auth.signOut();
+            await deleteAccessToken();
             Toast.show("Sign out was successful.", context,
                 duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
           },
@@ -431,18 +429,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void customModalBottomSheet(context, Widget bottomSheetContent) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) => bottomSheetContent,
-        isScrollControlled: true,
-        elevation: 15);
+  Future deleteAccessToken() async {
+    // remove the access token from shared preference
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('access_token');
   }
 }
 
 _launchTwitter() async {
   const url =
-      'https://twitter.com/intent/tweet?text=%23DevFest%20%23DevFestWarri%20@gdg_warri';
+      'https://twitter.com/intent/tweet?text=%23DevFest%20%23DevFest19%20%23DevFestWarri%20@gdg%20@gdg_warri%20%23GDG%20%23DevFestStory%20%23GDGStory';
   if (await url_laucher.canLaunch(url)) {
     await url_laucher.launch(url);
   } else {
